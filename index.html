@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BebaRolls | Rolls de Pizza</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #fff8ef;
+            color: #292929;
+        }
+
+        /* NAVBAR */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #ffffff;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 900;
+            color: #e63921;
+        }
+
+        .logo span {
+            color: #ffb703;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e63921;
+        }
+
+        .pedido-btn {
+            background: #e63921;
+            color: white !important;
+            padding: 12px 20px;
+            border-radius: 25px;
+        }
+
+        .pedido-btn:hover {
+            background: #c92e19;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 25px;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 65px;
+            line-height: 1;
+            color: #e63921;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span {
+            color: #ffb703;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-red {
+            background: #e63921;
+            color: white;
+        }
+
+        .btn-red:hover {
+            transform: translateY(-3px);
+            background: #c92e19;
+        }
+
+        .btn-yellow {
+            border: 2px solid #ffb703;
+            color: #d38d00;
+        }
+
+        .btn-yellow:hover {
+            background: #ffb703;
+            color: white;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pizza {
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e63921, #ffb703);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 170px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* TITULOS */
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            color: #e63921;
+        }
+
+        .section-title p {
+            margin-top: 10px;
+            color: #666;
+        }
+
+        /* MENU */
+        #menu {
+            padding: 80px 25px;
+            background: white;
+        }
+
+        .menu-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: #fff8ef;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card-image {
+            height: 170px;
+            border-radius: 15px;
+            background: #ffdf9e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 85px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            display: block;
+            color: #e63921;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .add-btn {
+            border: none;
+            background: #e63921;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background: #c92e19;
+        }
+
+        /* NOSOTROS */
+        #nosotros {
+            padding: 90px 25px;
+        }
+
+        .about {
+            max-width: 1050px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-icon {
+            width: 350px;
+            height: 300px;
+            background: #e63921;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            flex-shrink: 0;
+        }
+
+        .about-text h2 {
+            font-size: 40px;
+            color: #e63921;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 17px;
+        }
+
+        /* BENEFICIOS */
+        .benefits {
+            background: #e63921;
+            color: white;
+            padding: 70px 25px;
+        }
+
+        .benefit-container {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .benefit {
+            padding: 20px;
+        }
+
+        .benefit-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .benefit h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .benefit p {
+            line-height: 1.5;
+        }
+
+        /* PEDIDO */
+        #pedido {
+            padding: 90px 25px;
+            text-align: center;
+        }
+
+        .order-box {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .order-box h2 {
+            color: #e63921;
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .order-box p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        #cart {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #e63921;
+        }
+
+        .whatsapp {
+            display: inline-block;
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .whatsapp:hover {
+            background: #1ebe5d;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        footer .logo {
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #bbb;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 50px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .pizza {
+                width: 300px;
+                height: 300px;
+                font-size: 110px;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .about {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .benefit-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-icon {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav>
+            <div class="logo">Beba<span>Rolls</span></div>
+
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#pedido">Pedido</a></li>
+            </ul>
+
+            <a href="#pedido" class="pedido-btn">Pedir ahora</a>
+        </nav>
+    </header>
+
+
+    <!-- INICIO -->
+    <section class="hero" id="inicio">
+
+        <div class="hero-text">
+
+            <h1>
+                Pizza en forma de
+                <span>Roll.</span>
+            </h1>
+
+            <p>
+                ¡Bienvenido a BebaRolls! 🌯🍕
+                Disfruta nuestros deliciosos rolls de pizza,
+                preparados con ingredientes ricos y mucho queso.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-red">
+                    Ver menú
+                </a>
+
+                <a href="#nosotros" class="btn btn-yellow">
+                    Conócenos
+                </a>
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+            <div class="pizza">
+                🍕
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- MENU -->
+    <section id="menu">
+
+        <div class="menu-container">
+
+            <div class="section-title">
+                <h2>🔥 Nuestro Menú</h2>
+                <p>Elige tu BebaRoll favorito</p>
+            </div>
+
+            <div class="products">
+
+                <div class="card">
+
+                    <div class="card-image">
+                        🍕
+                    </div>
+
+                    <h3>BebaRoll Clásico</h3>
+
+                    <p>
+                        Salsa de tomate, mozzarella
+                        y pepperoni.
+                    </p>
+
+                    <span class="price">
+                        S/ 8.00
+                    </span>
+
+                    <button class="add-btn"
+                        onclick="addToCart('BebaRoll Clásico', 8)">
+                        Agregar
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-image">
+                        🧀
+                    </div>
+
+                    <h3>CheeseRoll</h3>
+
+                    <p>
+                        Mucho queso mozzarella
+                        y salsa especial.
+                    </p>
+
+                    <span class="price">
+                        S/ 9.00
+                    </span>
+
+                    <button class="add-btn"
+                        onclick="addToCart('CheeseRoll', 9)">
+                        Agregar
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-image">
+                        🌶️
+                    </div>
+
+                    <h3>MexiRoll</h3>
+
+                    <p>
+                        Pepperoni, queso y
+                        un toque picante.
+                    </p>
+
+                    <span class="price">
+                        S/ 10.00
+                    </span>
+
+                    <button class="add-btn"
+                        onclick="addToCart('MexiRoll', 10)">
+                        Agregar
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-image">
+                        🥓
+                    </div>
+
+                    <h3>BaconRoll</h3>
+
+                    <p>
+                        Queso mozzarella,
+                        tocino y salsa especial.
+                    </p>
+
+                    <span class="price">
+                        S/ 11.00
+                    </span>
+
+                    <button class="add-btn"
+                        onclick="addToCart('BaconRoll', 11)">
+                        Agregar
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-image">
+                        🍗
+                    </div>
+
+                    <h3>ChickenRoll</h3>
+
+                    <p>
+                        Pollo, queso mozzarella
+                        y salsa de pizza.
+                    </p>
+
+                    <span class="price">
+                        S/ 10.00
+                    </span>
+
+                    <button class="add-btn"
+                        onclick="addToCart('ChickenRoll', 10)">
+                        Agregar
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-image">
+                        🌽
+                    </div>
+
+                    <h3>FullRoll</h3>
+
+                    <p>
+                        Pepperoni, jamón,
+                        queso y champiñones.
+                    </p>
+
+                    <span class="price">
+                        S/ 12.00
+                    </span>
+
+                    <button class="add-btn"
+                        onclick="addToCart('FullRoll', 12)">
+                        Agregar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- NOSOTROS -->
+    <section id="nosotros">
+
+        <div class="about">
+
+            <div class="about-icon">
+                🌯
+            </div>
+
+            <div class="about-text">
+
+                <h2>¿Qué es BebaRolls?</h2>
+
+                <p>
+                    BebaRolls es una propuesta diferente para
+                    disfrutar la pizza. Convertimos los sabores
+                    clásicos de una pizza en deliciosos rolls
+                    fáciles de comer y perfectos para compartir.
+                </p>
+
+                <br>
+
+                <p>
+                    Nuestro objetivo es ofrecer una comida rica,
+                    práctica y divertida para todos los amantes
+                    de la pizza.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BENEFICIOS -->
+    <section class="benefits">
+
+        <div class="benefit-container">
+
+            <div class="benefit">
+
+                <div class="benefit-icon">
+                    🧀
+                </div>
+
+                <h3>Mucho queso</h3>
+
+                <p>
+                    BebaRolls preparados
+                    con queso derretido.
+                </p>
+
+            </div>
+
+
+            <div class="benefit">
+
+                <div class="benefit-icon">
+                    🔥
+                </div>
+
+                <h3>Recién hechos</h3>
+
+                <p>
+                    Preparamos nuestros rolls
+                    para que los disfrutes calientes.
+                </p>
+
+            </div>
+
+
+            <div class="benefit">
+
+                <div class="benefit-icon">
+                    ❤️
+                </div>
+
+                <h3>Hechos con cariño</h3>
+
+                <p>
+                    Queremos que cada BebaRoll
+                    tenga un sabor especial.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PEDIDO -->
+    <section id="pedido">
+
+        <div class="order-box">
+
+            <h2>🛒 Tu pedido</h2>
+
+            <p>
+                Agrega tus BebaRolls favoritos.
+            </p>
+
+            <div id="cart">
+                <p>
+                    Tu carrito está vacío.
+                </p>
+            </div>
+
+            <div class="total" id="total">
+                Total: S/ 0.00
+            </div>
+
+            <a
+                id="whatsapp"
+                class="whatsapp"
+                href="#"
+                target="_blank"
+                onclick="sendWhatsApp()">
+
+                📱 Pedir por WhatsApp
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="logo">
+            Beba<span>Rolls</span>
+        </div>
+
+        <p>
+            Rolls de pizza hechos para disfrutar 🍕
+        </p>
+
+        <br>
+
+        <p>
+            © 2026 BebaRolls - Todos los derechos reservados
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        let cart = [];
+
+        function addToCart(name, price) {
+
+            cart.push({
+                name: name,
+                price: price
+            });
+
+            updateCart();
+
+            document
+                .getElementById("pedido")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+        }
+
+
+        function updateCart() {
+
+            const cartElement =
+                document.getElementById("cart");
+
+            const totalElement =
+                document.getElementById("total");
+
+            if (cart.length === 0) {
+
+                cartElement.innerHTML =
+                    "<p>Tu carrito está vacío.</p>";
+
+                totalElement.innerHTML =
+                    "Total: S/ 0.00";
+
+                return;
+            }
+
+            let html = "";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+
+                html += `
+                    <div class="cart-item">
+
+                        <span>
+                            ${item.name}
+                        </span>
+
+                        <span>
+                            S/ ${item.price.toFixed(2)}
+                        </span>
+
+                    </div>
+                `;
+
+                total += item.price;
+
+            });
+
+            cartElement.innerHTML = html;
+
+            totalElement.innerHTML =
+                `Total: S/ ${total.toFixed(2)}`;
+        }
+
+
+        function sendWhatsApp() {
+
+            if (cart.length === 0) {
+
+                alert(
+                    "Primero agrega un BebaRoll a tu pedido."
+                );
+
+                return;
+            }
+
+            let message =
+                "🍕 *Hola BebaRolls!* Quiero hacer este pedido:%0A%0A";
+
+            let total = 0;
+
+            cart.forEach(item => {
+
+                message +=
+                    "🌯 " +
+                    item.name +
+                    " - S/ " +
+                    item.price.toFixed(2) +
+                    "%0A";
+
+                total += item.price;
+
+            });
+
+            message +=
+                "%0A💰 *Total: S/ " +
+                total.toFixed(2) +
+                "*";
+
+            /*
+             * CAMBIA ESTE NÚMERO POR EL WHATSAPP
+             * DE BEBAROLLS.
+             *
+             * Formato:
+             * 519XXXXXXXX
+             */
+
+            const phone =
+                "51908513326";
+
+            const url =
+                "https://wa.me/" +
+                phone +
+                "?text=" +
+                message;
+
+            window.open(url, "_blank");
+        }
+
+    </script>
+
+</body>
+</html>
